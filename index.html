@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <title>Create Your Own Beyonce</title>
+  <link href="style.css" rel="stylesheet" />
+
+  <!-- Source for css file: w3schools -->
+  <link href="http://www.w3schools.com/lib/w3.css" rel="stylesheet"/>
+
+  <!-- Jquery source -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <!-- inline css to override and center -->
+<style>
+  .mySlides {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+</style>
+
+</head>
+
+
+<body>
+   
+<h2 class="w3-center">Create Your Own Beyonce</h2>
+
+<!-- container to change head -->
+<div class="w3-content w3-display-container slider" id="head">
+  <img class="mySlides" src="head1.gif" style="width:400px">
+  <img class="mySlides" src="head2.gif" style="width:400px">
+  <img class="mySlides" src="head3.gif" style="width:400px">
+
+<!-- 'this' refers to exactly the html that is preceding it -->
+  <a class="w3-btn-floating w3-display-left" onclick="plusDivs(this,-1)">&#10094;</a>
+  <a class="w3-btn-floating w3-display-right" onclick="plusDivs(this,1)">&#10095;</a>
+</div>
+
+<!-- container to change body -->
+<div class="w3-content w3-display-container slider" id="body" >
+  <img class="mySlides" src="body1.gif" style="width:400px" >
+  <img class="mySlides" src="body2.gif" style="width:400px" >
+  <img class="mySlides" src="body3.gif" style="width:400px" >
+
+  <a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+  <a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+</div>
+
+<!-- container to change legs -->
+<div class="w3-content w3-display-container slider" id="legs">
+  <img class="mySlides" src="foot1.gif" style="width:400px">
+  <img class="mySlides" src="foot2.gif" style="width:400px">
+  <img class="mySlides" src="foot3.gif" style="width:400px">
+
+  <a class="w3-btn-floating w3-display-left" onclick="plusDivs(this, -1)">&#10094;</a>
+  <a class="w3-btn-floating w3-display-right" onclick="plusDivs(this, 1)">&#10095;</a>
+</div>
+
+
+<script type="text/javascript">
+var sliderObjects = [];
+createSliderObjects();
+
+//taking the html element and then a number, and matches it to the parent div. calls function for sliderObject in that variable
+function plusDivs(obj, n) {
+  var parentDiv = $(obj).parent();
+  var matchedDiv;
+  //i is the number sequence it's in, and item is the slider itself
+  $.each(sliderObjects, function(i, item) {
+    //if 'head' is equal to sliderObject's id
+    if ($(parentDiv[0]).attr('id') == $(item).attr('id')) {
+      matchedDiv = item;
+      return false;
+    }
+  });
+  matchedDiv.slideIndex=matchedDiv.slideIndex+n;
+  showDivs(matchedDiv, matchedDiv.slideIndex);
+}
+//everything that has class .slider is stored in sliderDivs
+function createSliderObjects() {
+  var sliderDivs = $('.slider');
+  $.each(sliderDivs, function(i, item) {
+    //making objects and setting id to the div id 'head', 'body' etc
+    var obj = {};
+    obj.id = $(item).attr('id');
+    obj.divContent = item;
+    obj.slideIndex = 1;
+    obj.slideContents = $(item).find('.mySlides');
+    showDivs(obj, 1);
+    sliderObjects.push(obj);
+  });
+}
+
+function showDivs(divObject, n) {
+  debugger;
+  var i;
+  if (n > divObject.slideContents.length) {
+    divObject.slideIndex = 1
+  }
+  if (n < 1) {
+    divObject.slideIndex = divObject.slideContents.length
+  }
+  for (i = 0; i < divObject.slideContents.length; i++) {
+    divObject.slideContents[i].style.display = "none";
+  }
+  divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
